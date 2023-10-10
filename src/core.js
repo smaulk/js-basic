@@ -139,7 +139,37 @@ function sequence(start = 0, step = 1) {
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
 function deepEqual(firstObject, secondObject) {
+    // Если объекты идентичны , возвращаем true
+    if (firstObject === secondObject) {
+        return true;
+    }
+    //Если объекты имеют тип NaN
+    if(Number.isNaN(firstObject) && Number.isNaN(secondObject)){
+        return true;
+    }
+    // Если один из объектов не является объектом или null, возвращаем false
+    if (typeof firstObject !== 'object' || typeof secondObject !== 'object' || firstObject === null || secondObject === null) {
+        return false;
+    }
 
+    // Получаем ключи (свойства) объектов
+    const keys1 = Object.keys(firstObject);
+    const keys2 = Object.keys(secondObject);
+
+    // Если количество ключей разное, возвращаем false
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+
+    // Перебираем ключи и рекурсивно сравниваем значения
+    for (let key of keys1) {
+        if (!keys2.includes(key) || !deepEqual(firstObject[key], secondObject[key])) {
+            return false;
+        }
+    }
+
+    // Если все проверки пройдены, объекты равны
+    return true;
 }
 
 module.exports = {
