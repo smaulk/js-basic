@@ -147,8 +147,8 @@ function deepEqual(firstObject, secondObject) {
     if(Number.isNaN(firstObject) && Number.isNaN(secondObject)){
         return true;
     }
-    // Если один из объектов не является объектом или null, возвращаем false
-    if (typeof firstObject !== 'object' || typeof secondObject !== 'object' || firstObject === null || secondObject === null) {
+    // Если один из объектов не является объектом
+    if (typeof firstObject !== 'object' || typeof secondObject !== 'object' ) {
         return false;
     }
 
